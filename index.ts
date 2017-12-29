@@ -16,23 +16,24 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.set(0, 0, 5);
 camera.lookAt(scene.position);
 
-// const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-// const geometry = new THREE.TextGeometry("Hello amigo", {
-//   font: new THREE.Font(fontJson),
-//   size: 80,
-//   height: 5,
-//   curveSegments: 12,
-//   bevelEnabled: true,
-//   bevelThickness: 10,
-//   bevelSize: 8,
-// });
-// const mesh = new THREE.Mesh(geometry, material);
+const textMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+const textGeometry = new THREE.TextGeometry("Hello amigo", {
+  font: new THREE.Font(fontJson),
+  size: 80,
+  height: 5,
+  curveSegments: 12,
+  bevelEnabled: true,
+  bevelThickness: 10,
+  bevelSize: 8,
+});
+const textMesh = new THREE.Mesh(textGeometry, textMaterial);
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 const mesh = new THREE.Mesh(geometry, material);
 
 scene.add(mesh);
+scene.add(textMesh);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.addEventListener("change", () => {
