@@ -2,9 +2,13 @@
 # yarn lockfile v1
 
 
+"@types/node@^8.5.2":
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.2.tgz#83b8103fa9a2c2e83d78f701a9aa7c9539739aa5"
+
 "@types/three@^0.84.35":
-  version "0.84.35"
-  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.84.35.tgz#df4645c542cbb93419786f2c49ecd0d85d037991"
+  version "0.84.36"
+  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.84.36.tgz#6af9dd8da4e517c109f319c2e79f5629ef3a3d7f"
   dependencies:
     "@types/webvr-api" "*"
 
