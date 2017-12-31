@@ -1,5 +1,5 @@
 // tslint:disable-next-line:no-var-requires
-const fontJson = require("./fonts/Open_Sans_Bold.json");
+const fontJson = require("./fonts/gentilis_bold.typeface.json");
 import "./index.scss";
 
 import * as THREE from "three";
@@ -7,37 +7,40 @@ import * as THREE from "three";
 import "./controls/OrbitControls";
 
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 0, 5);
-camera.lookAt(scene.position);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1500);
+camera.position.set(0, 0, 700);
+const cameraTarget = new THREE.Vector3(0, 50, 0);
 
-const textMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-const textGeometry = new THREE.TextGeometry("Hello amigo", {
+const textGeometry = new THREE.TextGeometry("AMIGO", {
   font: new THREE.Font(fontJson),
-  size: 80,
-  height: 5,
+  size: 100,
+  height: 50,
   curveSegments: 12,
-  bevelEnabled: true,
-  bevelThickness: 10,
-  bevelSize: 8,
+  bevelThickness: 2,
+  bevelSize: 1,
 });
-const textMesh = new THREE.Mesh(textGeometry, textMaterial);
 
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const mesh = new THREE.Mesh(geometry, material);
+textGeometry.computeBoundingBox();
+textGeometry.computeVertexNormals();
 
-scene.add(mesh);
+const centerOffset = -0.5 * (textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x);
+const textMesh = new THREE.Mesh(textGeometry, undefined);
+textMesh.position.x = centerOffset;
 scene.add(textMesh);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.addEventListener("change", () => {
+  camera.lookAt(cameraTarget);
+  renderer.clear();
   renderer.render(scene, camera);
 });
 
+camera.lookAt(cameraTarget);
+renderer.clear();
 renderer.render(scene, camera);
