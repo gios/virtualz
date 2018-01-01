@@ -17,9 +17,14 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.set(0, 0, 700);
 const cameraTarget = new THREE.Vector3(0, 50, 0);
 
+const pointLight = new THREE.PointLight(0xffffff, 1.5);
+pointLight.position.set(0, 100, 90);
+scene.add(pointLight);
+pointLight.color.setHSL(Math.random(), 1, 0.5);
+
 const textMaterials = [
-  new THREE.MeshBasicMaterial({ color: 0xffffff, flatShading: true }),
-  new THREE.MeshStandardMaterial(),
+  new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true }),
+  new THREE.MeshPhongMaterial({ color: 0xffffff }),
 ];
 
 const textGeometry = new THREE.TextGeometry("AMIGO", {
