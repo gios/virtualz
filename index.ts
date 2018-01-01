@@ -17,6 +17,11 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.set(0, 0, 700);
 const cameraTarget = new THREE.Vector3(0, 50, 0);
 
+const textMaterials = [
+  new THREE.MeshBasicMaterial({ color: 0xffffff, flatShading: true }),
+  new THREE.MeshStandardMaterial(),
+];
+
 const textGeometry = new THREE.TextGeometry("AMIGO", {
   font: new THREE.Font(fontJson),
   size: 100,
@@ -30,7 +35,7 @@ textGeometry.computeBoundingBox();
 textGeometry.computeVertexNormals();
 
 const centerOffset = -0.5 * (textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x);
-const textMesh = new THREE.Mesh(textGeometry, undefined);
+const textMesh = new THREE.Mesh(textGeometry, textMaterials);
 textMesh.position.x = centerOffset;
 scene.add(textMesh);
 
